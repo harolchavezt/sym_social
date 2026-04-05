@@ -2,10 +2,11 @@
 
 
 {% block body %}
-	<div>The current message is:</div>
+	<div>The current message is:
+		{{message.message}}</div>
 	<div>
 		<b>
-			{{message}}
+			{{include('hello/_message.html.twig')}}
 		</b>
 	</div>
 {% endblock %}
