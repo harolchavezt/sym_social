@@ -2,6 +2,13 @@
 
 {% block body %}
 	<div>
-		{{message}}
+		{% if messages | length > 0 %}
+			{% for message in messages %}
+				<div>{{message}}</div>
+			{% endfor %}
+		{% else %}
+			<div>There's nothing here yet</div>
+		{% endif %}
+
 	</div>
 {% endblock %}
