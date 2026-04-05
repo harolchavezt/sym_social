@@ -3,12 +3,11 @@
 {% block body %}
 	<div>
 		{% if messages | length > 0 %}
-			{% for message in messages %}
+			{% for message in messages | slice (0, limit) %}
 				<div>{{message}}</div>
 			{% endfor %}
 		{% else %}
 			<div>There's nothing here yet</div>
 		{% endif %}
-
 	</div>
 {% endblock %}
