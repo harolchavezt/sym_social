@@ -67,7 +67,10 @@ final class MicroPostController extends AbstractController
             $entityManager->persist($post);
             $entityManager->flush();
 
-            //Add redirection later
+            //Add messages
+            $this->addFlash('success', 'Registro creado');
+            //Redirection
+            return $this->redirectToRoute('app_micro_post');
         }
 
         return $this->render(
