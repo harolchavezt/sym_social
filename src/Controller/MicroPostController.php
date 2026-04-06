@@ -9,6 +9,7 @@ use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 
 final class MicroPostController extends AbstractController
 {
@@ -46,5 +47,23 @@ final class MicroPostController extends AbstractController
         return $this->render('micro_post/show.html.twig', [
             'post' => $post,
         ]);
+    }
+
+    #[Route('/micro-post/add', name: 'app_micro_post_add', priority: 2)]
+    public function add(): Response
+    {
+        $microPost = new MicroPost();
+        $form = $this->createFormBuilder($microPost)
+            ->add('title')
+            ->add('text')
+            ->add('submit', SubmitType::class, ['label' => 'Save'])
+            ->getForm();
+
+        return $this->render(
+            'task/add.html.twig',
+            [
+                'form' => $form
+            ]
+        );
     }
 }
