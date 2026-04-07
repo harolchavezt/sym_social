@@ -42,7 +42,7 @@ final class MicroPostController extends AbstractController
 
         // dd($posts->findAll());
         return $this->render('micro_post/index.html.twig', [
-            'posts' => $posts->findAll(),
+            'posts' => $posts->findAllWithComments(),
         ]);
     }
     #[Route('/micro-post/{id}', name: 'app_micro_post_show')]
@@ -55,7 +55,7 @@ final class MicroPostController extends AbstractController
     }
 
     #[Route('/micro-post/add', name: 'app_micro_post_add', priority: 2)]
-    public function add(Request $request, MicroPostRepository $posts, EntityManagerInterface $entityManager): Response
+    public function add(MicroPost $post, Request $request, MicroPostRepository $posts, EntityManagerInterface $entityManager): Response
     {
         $form = $this->createForm(MicroPostType::class, new Micropost());
 
@@ -76,7 +76,8 @@ final class MicroPostController extends AbstractController
         return $this->render(
             'task/add.html.twig',
             [
-                'form' => $form
+                'form' => $form,
+                'post' => $post
             ]
         );
     }
@@ -103,7 +104,8 @@ final class MicroPostController extends AbstractController
         return $this->render(
             'task/edit.html.twig',
             [
-                'form' => $form
+                'form' => $form,
+                'post' => $post
             ]
         );
     }
