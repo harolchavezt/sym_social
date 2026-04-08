@@ -6,12 +6,9 @@ use App\Entity\Comments;
 use App\Entity\MicroPost;
 use App\Form\CommentType;
 use App\Form\MicroPostType;
-use App\Repository\CommentsRepository;
 use App\Repository\MicroPostRepository;
-use Datetime;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
@@ -66,7 +63,6 @@ final class MicroPostController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $post = $form->getData();
-            $post->setCreated(new DateTime());
             $post->setAuthor($this->getUser());
             $entityManager->persist($post);
             $entityManager->flush();

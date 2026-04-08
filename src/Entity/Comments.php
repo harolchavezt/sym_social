@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use App\Repository\CommentsRepository;
+use DateTime;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
@@ -26,6 +27,14 @@ class Comments
     #[ORM\ManyToOne(inversedBy: 'comments')]
     #[ORM\JoinColumn(nullable: false)]
     private ?User $author = null;
+
+    #[ORM\Column]
+    private ?\DateTime $created = null;
+
+    public function __construct()
+    {
+        $this->created = new DateTime;
+    }
 
     public function getId(): ?int
     {
@@ -64,6 +73,18 @@ class Comments
     public function setAuthor(?User $author): static
     {
         $this->author = $author;
+
+        return $this;
+    }
+
+    public function getCreated(): ?\DateTime
+    {
+        return $this->created;
+    }
+
+    public function setCreated(\DateTime $created): static
+    {
+        $this->created = $created;
 
         return $this;
     }
