@@ -54,7 +54,6 @@ class RegistrationController extends AbstractController
 
             // do anything else you need here, like send an email
             return $this->redirectToRoute('app_micro_post');
-            return $security->login($user, 'form_login', 'main');
         }
 
         return $this->render('registration/register.html.twig', [
