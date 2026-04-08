@@ -44,6 +44,7 @@ final class MicroPostController extends AbstractController
         ]);
     }
     #[Route('/micro-post/{id}', name: 'app_micro_post_show')]
+    #[IsGranted(MicroPost::VIEW, 'post')]
     public function showOne(MicroPost $post): Response
     {
         // dd($post);
@@ -83,7 +84,7 @@ final class MicroPostController extends AbstractController
     }
 
     #[Route('/micro-post/{post}/edit', name: 'app_micro_post_edit')]
-    #[IsGranted('ROLE_EDITOR')]
+    #[IsGranted(MicroPost::EDIT, 'post')]
     public function edit(MicroPost $post, Request $request, EntityManagerInterface $entityManager): Response
     {
         $form = $this->createForm(MicroPostType::class, $post);
