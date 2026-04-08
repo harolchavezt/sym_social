@@ -38,10 +38,15 @@ darkMode: 'selector'
 
 			<div class="text-right">
 				<div class="text-sm text-gray-400 dark:text-gray-500">
-					<div>Login & Registration Goes Here</div>
-					<div>
-						<a href="{{ path('app_micro_post_add') }}">Add New</a>
-					</div>
+					{% if app.user %}
+						<div>
+							<a href="{{ path('app_micro_post_add') }}">Add New</a>
+						</div>
+					{% else %}
+
+						<a href="{{ path('app_login') }}">Login</a>
+
+					{% endif %}
 				</div>
 			</div>
 		</div>
@@ -51,7 +56,5 @@ darkMode: 'selector'
 			{% endfor %}
 			{% block body %}{% endblock %}
 		</div>
-
-
 	</body>
-</html>
+</html></body></html>
