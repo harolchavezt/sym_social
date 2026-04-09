@@ -26,6 +26,8 @@ class AppFixtures extends Fixture
                 '12345678'
             )
         );
+
+        $user1->setRoles(['ROLE_COMMENTER']); 
         $manager->persist($user1);
 
         $user2 = new User();
@@ -36,6 +38,7 @@ class AppFixtures extends Fixture
                 '12345678'
             )
         );
+        $user2->setRoles(['ROLE_COMMENTER']); 
         $manager->persist($user2);
 
         $microPost1 = new MicroPost();
